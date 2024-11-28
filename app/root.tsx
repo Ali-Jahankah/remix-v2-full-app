@@ -5,17 +5,18 @@ import {
   Scripts,
   ScrollRestoration
 } from '@remix-run/react';
-import type { LinksFunction } from '@remix-run/node';
-import sharedStyles from '~/styles/shared.css';
-import './tailwind.css';
+import shared from '~/styles/shared.css?url';
 import MainHeader from '~/components/navigation/MainHeader';
-export const links: LinksFunction = () => [
-  {
-    rel: 'stylesheet',
-    href: sharedStyles
-  }
-];
 
+export const meta = () => {
+  return [
+    {
+      charset: 'utf-8',
+      title: 'New Remix App',
+      viewport: 'width=device-width,initial-scale=1'
+    }
+  ];
+};
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -34,7 +35,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
     </html>
   );
 }
-
+export function links() {
+  return [
+    {
+      rel: 'stylesheet',
+      href: shared
+    }
+  ];
+}
 export default function App() {
   return <Outlet />;
 }
